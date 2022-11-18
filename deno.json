@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+      "allowJs": false,
+      "strict": true
+    },
+    "lint": {
+      "files": {
+        "include": ["src/"]
+      },
+      "rules": {
+        "tags": ["recommended"],
+        "include": [
+          "ban-untagged-todo",
+          "no-implicit-any",
+          "explicit-function-return-type"
+        ],
+        "exclude": ["no-debugger", "no-console"]
+      }
+    },
+    "tasks": {
+      "start": "deno run -A main.ts",
+      "dev": "deno run -A --watch main.ts",
+      "inspect": "deno run -A --inspect=0.0.0.0:9229 ./main.ts"
+    },
+    "importMap": "./import_map.json"
+  }
