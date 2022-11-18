@@ -1,18 +1,20 @@
 import { Application, Router } from "oak";
 
+import { getBooks, getUser } from "./resolvers/get.ts";
 import { addAuthor, addBook, addUser } from "./resolvers/post.ts";
- import { deleteUser } from "./resolvers/delete.ts";
-import { getBooks } from "./resolvers/get.ts";
+import { deleteUser } from "./resolvers/delete.ts";
+
 
 
 const router = new Router();
 
 router
  .get("/books", getBooks)
+ .get("/id", getUser)
  .post("/books", addBook)
  .post("/users", addUser)
  .post("/authors", addAuthor)
- .delete("/users/:id", deleteUser)  // domain.com/api/users/oujoer342231
+ .delete("/users", deleteUser)  // domain.com/api/users/oujoer342231
 
 
 const app = new Application();

@@ -3,7 +3,7 @@ import { ObjectId } from "https://deno.land/x/mongo@v0.31.1/mod.ts";
 import { UsuariosCollection } from "../db/mongo.ts";
 
 type RemoveUserContext = RouterContext<
-  "/user",
+  "/users",
   Record<string | number, string | undefined>,
   Record<string, any>
 >;
