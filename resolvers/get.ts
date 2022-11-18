@@ -19,7 +19,7 @@ type GetUserContext = RouterContext<
 export const getBooks = async (context: GetBooksContext) => {
   try {
     const params = getQuery(context, { mergeParams: true });
-    if (!params.page) { //con el id de mongoDB
+    if (!params.page) { 
       context.response.status = 403;
       return;
     }
@@ -46,34 +46,21 @@ export const getBooks = async (context: GetBooksContext) => {
   }
 };
 
-// export const getUser = async (context: GetUserContext) => {
-//   try {
-//     const freeCars = await P3Collection.find({ free: true }).toArray();
-//     if (freeCars.length > 0) {
-//       const slot = freeCars[0];
-//       const { _id, ...carWithoutId } = slot as P3Schema;
+ export const getUser = async (context: GetUserContext) => {
+   try {
+    const id = new ObjectId(context.params?.id);
 
-//       await P3Collection.updateOne(
-//         {
-//           _id,
-//         },
-//         {
-//           $set: {
-//             free: false,
-//           },
-//         }
-//       );
+    const result = await UsuariosCollection.findOne({
+      _id: id,
+    });
+  
+    if (!result) {
+      context.response.status = 404;
+      return;
+    }
 
-//       context.response.body = {
-//         ...carWithoutId,
-//         id: _id.toString(),
-//       };
-//     } else {
-//       context.response.status = 404;
-//       context.response.body = { message: "No free cars" };
-//     }
-//   } catch (e) {
-//     console.error(e);
-//     context.response.status = 500;
-//   }
-// };
+   } catch (e) {
+     console.error(e);
+     context.response.status = 500;
+   }
+ };
